@@ -52,23 +52,23 @@ class UI_login_window(QMainWindow):
 
     def btn_login_clicked(self):
         self.user_id = self.txt_user_id.text()# this line will be deleted
-        # self.wrong_inputs = False
-        # self.check_input()
-        # if not self.wrong_inputs:
-        self.UI_main_window = UI_main_window(self, self.user_id)
-        self.UI_main_window.signal_object.connect(self.show)
-        self.clear_window()
-        self.close()
-        self.UI_main_window.show()
+        self.wrong_inputs = False
+        self.check_input()
+        if not self.wrong_inputs:
+            self.UI_main_window = UI_main_window(self, self.user_id)
+            self.UI_main_window.signal_object.connect(self.show)
+            self.clear_window()
+            self.close()
+            self.UI_main_window.show()
 
         
 
     def lbl_signup_clicked(self, event=None): # Accept event for mousePressEvent
-        self.UI_main_window = UI_signup_window(self)
-        self.UI_main_window.signal_object.connect(self.show)
+        self.UI_singup_window = UI_signup_window(self)
+        self.UI_singup_window.signal_object.connect(self.show)
         self.clear_window()
         self.close()
-        self.UI_main_window.show()
+        self.UI_singup_window.show()
 
     def get_window_values(self):
         self.user_id = self.txt_user_id.text()
@@ -76,6 +76,13 @@ class UI_login_window(QMainWindow):
 
     def check_input(self):
         self.get_window_values()
+        forbidden_symbols = ["'", '"', ";", "--", "/*", "*/", "#"]
+        if any(symbol in self.user_id for symbol in forbidden_symbols):
+            self.lbl_wrong_input.setText("No injection symbols allowed")
+            self.wrong_inputs = True
+        elif any(symbol in self.password for symbol in forbidden_symbols):
+            self.lbl_wrong_input.setText("No injection symbols allowed")
+            self.wrong_inputs = True
         if not self.controller.authenticate_user(self.user_id, self.password):
             self.lbl_wrong_input.setText("Wrong credentials")
             self.wrong_inputs = True

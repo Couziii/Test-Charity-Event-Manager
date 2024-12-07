@@ -16,9 +16,11 @@ class UI_signup_window(QMainWindow):
     # accessing widgets
     self.btn_cancel = self.findChild(QPushButton, "btn_cancel")
     self.btn_signup = self.findChild(QPushButton, "btn_signup")
+
     self.txt_user_id = self.findChild(QLineEdit, "txt_user_id")
     self.txt_password = self.findChild(QLineEdit, "txt_password")
     self.txt_admin_code = self.findChild(QLineEdit, "txt_admin_code")
+
     self.lbl_unavailable_user_id = self.findChild(QLabel, "lbl_unavailable_user_id")
     self.lbl_unauthorized_password = self.findChild(QLabel, "lbl_unauthorized_password")
     self.lbl_wrong_admin_code = self.findChild(QLabel, "lbl_wrong_admin_code")
@@ -33,13 +35,13 @@ class UI_signup_window(QMainWindow):
     self.close()
 
   def btn_signup_clicked(self):
-    # self.wrong_inputs = False
-    # self.check_input()
-    # if not self.wrong_inputs:
-    #   if self.admin_code.strip() != "":
-    #     self.controller.insert_new_user(self.user_id, self.password)
-    #   else:
-    #     self.controller.insert_new_user(self.user_id, self.password, True)
+    self.wrong_inputs = False
+    self.check_input()
+    if not self.wrong_inputs:
+      if self.admin_code.strip() != "":
+        self.controller.insert_new_user(self.user_id, self.password, self.admin_code)
+      else:
+        self.controller.insert_new_user(self.user_id, self.password)
       self.clear_window()
       self.signal_object.emit()
       self.close()
@@ -55,22 +57,22 @@ class UI_signup_window(QMainWindow):
       if any(symbol in self.user_id for symbol in forbidden_symbols):
         self.lbl_unavailable_user_id.setText("No injection symbols allowed")
         self.wrong_inputs = True
-      elif any(symbol in self.password for symbol in forbidden_symbols):
+      if any(symbol in self.password for symbol in forbidden_symbols):
         self.lbl_unauthorized_password.setText("No injection symbols allowed")
         self.wrong_inputs = True
-      elif any(symbol in self.admin_code for symbol in forbidden_symbols):
+      if any(symbol in self.admin_code for symbol in forbidden_symbols):
         self.lbl_wrong_admin_code.setText("No injection symbols allowed")
         self.wrong_inputs = True
-      elif self.controller.get_user_id(self.user_id):
+      if self.controller.get_user_id(self.user_id) is not None:
         self.lbl_unavailable_user_id.setText("User ID already exist")
         self.wrong_inputs = True
-      elif self.user_id.strip() == "":
+      if self.user_id.strip() == "":
         self.lbl_unavailable_user_id.setText("User ID must not be empty!")
         self.wrong_inputs = True
-      elif self.password.strip() == "":
+      if self.password.strip() == "":
         self.lbl_unauthorized_password.setText("Password must not be empty!")
         self.wrong_inputs = True
-      elif self.admin_code.strip() != "":
+      if self.admin_code.strip() != "":
         if not self.controller.check_admin_code(self.admin_code):
           self.lbl_wrong_admin_code.setText("Wrong admin code")
           self.wrong_inputs = True
