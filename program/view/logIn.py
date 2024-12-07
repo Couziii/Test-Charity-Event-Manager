@@ -32,22 +32,6 @@ class UI_login_window(QMainWindow):
         # Make lbl_signup clickable
         self.lbl_signup.mousePressEvent = self.lbl_signup_clicked
 
-        # when window open settings
-        self.lbl_signup.setTextFormat(Qt.RichText)  # Enables rich text, like HTML
-        self.lbl_signup.setOpenExternalLinks(False)  # Keeps click handling within the application
-        self.lbl_signup.setStyleSheet("""
-        QLabel {
-            color: blue; 
-            text-decoration: underline;  /* Makes it look like a hyperlink */
-        }
-        QLabel:hover {
-            color: darkblue;  /* Changes the color when hovering */
-        }
-        """)
-
-        # Set the cursor to a pointing hand cursor
-        self.lbl_signup.setCursor(Qt.PointingHandCursor)
-
         self.show()
 
     def btn_login_clicked(self):

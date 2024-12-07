@@ -29,20 +29,34 @@
    </widget>
    <widget class="QLabel" name="lbl_signup">
     <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>350</y>
-      <width>41</width>
-      <height>31</height>
-     </rect>
+        <rect>
+            <x>570</x>
+            <y>350</y>
+            <width>41</width>
+            <height>31</height>
+        </rect>
     </property>
     <property name="font">
-     <font>
-      <underline>true</underline>
-     </font>
+        <font>
+            <underline>true</underline>
+        </font>
     </property>
     <property name="text">
-     <string>Sign up</string>
+        <string>Sign up</string>
+    </property>
+    <property name="styleSheet">
+        <string notr="true">
+        QLabel {
+            color: blue;
+            text-decoration: underline; /* Makes it look like a hyperlink */
+        }
+        QLabel:hover {
+            color: darkblue; /* Changes the color when hovering */
+        }
+        </string>
+    </property>
+    <property name="cursor">
+        <enum>PointingHandCursor</enum>
     </property>
    </widget>
    <widget class="QLineEdit" name="txt_user_id">
