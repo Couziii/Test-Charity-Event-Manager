@@ -9,8 +9,54 @@ from program.view.signUp import UI_signup_window
 from program.controller.controller import Controller
 
 
-class UI_login_window(QMainWindow):
+"""
+UI_login_window: A class representing the login window of the application.
 
+This class is responsible for managing the login functionality, including handling
+user input, validating credentials, and transitioning to other windows within the
+application. It uses PyQt5 for the graphical interface.
+
+Attributes:
+-----------
+btn_login : QPushButton
+    The button for triggering the login action.
+
+txt_user_id : QLineEdit
+    The text field for entering the user ID.
+
+txt_password : QLineEdit
+    The text field for entering the user password.
+
+lbl_wrong_input : QLabel
+    A label for displaying error messages related to user input or login failure.
+
+lbl_signup : QLabel
+    A clickable label for transitioning to the signup window.
+
+controller : Controller
+    A controller object for managing user authentication.
+
+Methods:
+--------
+__init__(parent=None)
+    Initializes the login window, connects signals to actions, and displays the UI.
+
+btn_login_clicked()
+    Handles the login button click, validates inputs, and transitions to the main window on success.
+
+lbl_signup_clicked(event=None)
+    Handles clicks on the signup label and transitions to the signup window.
+
+get_window_values()
+    Retrieves the values entered in the user ID and password fields.
+
+check_input()
+    Validates the user input for forbidden symbols and authenticates credentials.
+
+clear_window()
+    Clears all input fields and resets error messages.
+"""
+class UI_login_window(QMainWindow):
     def __init__(self, parent=None):
         super(UI_login_window, self).__init__(parent)
         uic.loadUi("program/view/uifiles/login_page.ui", self)

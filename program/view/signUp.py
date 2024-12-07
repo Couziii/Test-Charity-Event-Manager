@@ -6,6 +6,68 @@ from PyQt5 import uic
 from PyQt5.QtCore import *
 from program.controller.controller import Controller
 
+
+"""
+UI_signup_window
+================
+
+This class defines a signup window for a PyQt application, designed to facilitate user registration with validation and appropriate error handling.
+
+Attributes
+----------
+signal_object : pyqtSignal
+    A custom PyQt signal that is emitted when the signup or cancel button is clicked.
+
+controller : Controller
+    An instance of the `Controller` class used for managing user-related operations.
+
+btn_cancel : QPushButton
+    A button to cancel the signup process and close the window.
+
+btn_signup : QPushButton
+    A button to initiate the signup process.
+
+txt_user_id : QLineEdit
+    A text input field for entering the user's ID.
+
+txt_password : QLineEdit
+    A text input field for entering the user's password.
+
+txt_admin_code : QLineEdit
+    A text input field for entering an admin code (if applicable).
+
+lbl_unavailable_user_id : QLabel
+    A label to display messages about invalid or unavailable user IDs.
+
+lbl_unauthorized_password : QLabel
+    A label to display messages about invalid passwords.
+
+lbl_wrong_admin_code : QLabel
+    A label to display messages about incorrect admin codes.
+
+wrong_inputs : bool
+    A flag indicating whether the user input is valid or contains errors.
+
+Methods
+-------
+__init__(parent=None)
+    Initializes the UI_signup_window instance, loads the UI file, and connects buttons to their respective slots.
+
+btn_cancel_clicked()
+    Handles the behavior when the cancel button is clicked. Clears input fields, emits the signal, and closes the window.
+
+btn_signup_clicked()
+    Handles the behavior when the signup button is clicked. Validates input, inserts a new user into the database if valid, and closes the window.
+
+get_window_values()
+    Retrieves the current values from the input fields and stores them in class attributes.
+
+check_input()
+    Validates user input to prevent SQL injection, checks for required fields, and verifies the uniqueness of the user ID and correctness of the admin code.
+
+clear_window()
+    Clears all input fields and resets error labels.
+"""
 class UI_signup_window(QMainWindow):
   signal_object = pyqtSignal()
 
