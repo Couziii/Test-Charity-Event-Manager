@@ -60,6 +60,13 @@ class UI_login_window(QMainWindow):
     def __init__(self, parent=None):
         super(UI_login_window, self).__init__(parent)
         uic.loadUi("program/view/uifiles/login_page.ui", self)
+        # uic.loadUi(os.path.join(os.path.dirname(__file__), "uiFiles", "login_page.ui"), self)
+
+        # For unit testing, the path is different
+        # uic.loadUi("uiFiles/login_page.ui", self)
+
+        # For unit tests
+        self.wrong_inputs = False
 
         self.controller = Controller()
 
