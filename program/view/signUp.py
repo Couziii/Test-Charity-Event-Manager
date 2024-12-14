@@ -73,20 +73,8 @@ class UI_signup_window(QMainWindow):
 
   def __init__(self, parent=None):
     super(UI_signup_window, self).__init__(parent)
-
-    # For me, the path program/view/uiFiles/signup_page.ui ran into FileNotFound errors
-    uic.loadUi(os.path.join(os.path.dirname(__file__), "uiFiles", "login_page.ui"), self)
-    
-    # uic.loadUi("program/view/uifiles/signup_page.ui", self)
-    
-    # For unit tests the path is different, since they are in the same directory
-    # uic.loadUi("uiFiles/signup_page.ui", self)
-    
+    uic.loadUi("program/view/uifiles/signup_page.ui", self)
     self.controller = Controller()
-
-    # Added for unit tests
-    self.wrong_inputs = False
-
     # accessing widgets
     self.btn_cancel = self.findChild(QPushButton, "btn_cancel")
     self.btn_signup = self.findChild(QPushButton, "btn_signup")

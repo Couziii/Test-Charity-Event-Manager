@@ -116,7 +116,7 @@ class UI_main_window(QMainWindow):
 
     def __init__(self, parent=None, user_id=None, initial_tab_index=0):
         super(UI_main_window, self).__init__(parent)
-        uic.loadUi("uifiles/main_page.ui", self)
+        uic.loadUi("program/view/uifiles/main_page.ui", self)
 
         self.user_id = user_id
         self.controller= Controller()

@@ -59,17 +59,9 @@ clear_window()
 class UI_login_window(QMainWindow):
     def __init__(self, parent=None):
         super(UI_login_window, self).__init__(parent)
-
-        uic.loadUi(os.path.join(os.path.dirname(__file__), "uiFiles", "login_page.ui"), self)
-        # uic.loadUi("program/view/uiFiles/login_page.ui", self)
-
-        # For unit tests the path is different, since they are in the same directory
-        # uic.loadUi("uiFiles/login_page.ui", self)
+        uic.loadUi("program/view/uifiles/login_page.ui", self)
 
         self.controller = Controller()
-
-        # Added for unit tests
-        # self.wrong_inputs = False
 
         # accessing widgets
         self.btn_login = self.findChild(QPushButton, "btn_login")
