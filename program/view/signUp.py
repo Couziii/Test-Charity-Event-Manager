@@ -74,6 +74,14 @@ class UI_signup_window(QMainWindow):
   def __init__(self, parent=None):
     super(UI_signup_window, self).__init__(parent)
     uic.loadUi("program/view/uifiles/signup_page.ui", self)
+    # uic.loadUi(os.path.join(os.path.dirname(__file__), "uiFiles", "signup_page.ui"), self)
+
+    # For unit testing, the path is different
+    # uic.loadUi("uiFiles/signup_page.ui", self)
+
+    # For unit tests
+    self.wrong_inputs = False
+
     self.controller = Controller()
     # accessing widgets
     self.btn_cancel = self.findChild(QPushButton, "btn_cancel")
