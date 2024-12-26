@@ -61,6 +61,65 @@ class Write_db:
     def insert_new_user(self, user_id, password, admin):
         user_info = {"Password" : password, "Admin" : admin}
         self.database.child("Users").child(user_id).set(user_info)
+    
+    """
+    Registers a user's enrollment to a charity event.
+    -> Updates the user's enrolled_events attribute with the new event id.
+    -> Updates the event's enrolled_users attribute to hold the logged in user.
+    """
+    def register_enrollment(self, event_id, user_id):
+        try:
+            user_data = self.database.child("Users").child(user_id).get()
+            event_data = self.database.child("Events").child(event_id).get()
+
+            if user_data.val() is not None and event_data.val() is not None:
+                enrolled_events = user_data.val().get("enrolled_events", [])
+                enrolled_users = event_data.val().get("enrolled_users", [])
+
+                if event_id not in enrolled_events:
+                    enrolled_events.append(event_id)
+                    self.database.child("Users").child(user_id).update({"enrolled_events": enrolled_events})
+
+                if user_id not in enrolled_users:
+                    enrolled_users.append(user_id)
+                    self.database.child("Events").child(event_id).update({"enrolled_users": enrolled_users})
+                
+                return True
+            else:
+                return False
+        except Exception as e:
+            print("Error during enrollment", e)
+            return False
+    
+    """
+    Unenrolls a user and withdraws their enrollment to a charity event.
+    -> Updates the user's enrolled_events to not hold the event id anymore.
+    -> Updates the event's enrolled_users attribute to not hold the logged in user's user id anymore.
+    """
+    def unenroll(self, event_id, user_id):
+        try:
+            user_data = self.database.child("Users").child(user_id).get()
+            event_data = self.database.child("Events").child(event_id).get()
+
+            if user_data.val() is not None and event_data.val() is not None:
+                enrolled_events = user_data.val().get("enrolled_events", [])
+                enrolled_users = event_data.val().get("enrolled_users", [])
+                            
+                if event_id in enrolled_events:
+                    enrolled_events.remove(event_id)
+                    self.database.child("Users").child(user_id).update({"enrolled_events": enrolled_events})
+
+                if user_id in enrolled_users:
+                    enrolled_users.remove(user_id)
+                    self.database.child("Events").child(event_id).update({"enrolled_users": enrolled_users})
+                
+                return True
+            else:
+                return False
+        except Exception as e:
+            print("Error during unenrollment", e)
+            return False
+
 
     """
     Updates a user's ID in the database.
