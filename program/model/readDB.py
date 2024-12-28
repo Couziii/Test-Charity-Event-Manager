@@ -46,7 +46,9 @@ class Read_db:
         tuple: A tuple containing the user ID and associated information if the user exists.
         None: If the user ID does not exist in the database.
     """
+
     def get_user_id(self, user_id):
+
         users = self.database.child("Users").get()
         if users.val() is not None:  # Check if there are any users in the database
             for uid, user_info in users.val().items():
@@ -54,6 +56,46 @@ class Read_db:
                     return uid, user_info
         return None  # Return None if user_id is not found
     
+    """
+    Retrieves all events in the database collection Events.
+    """
+    def get_events(self):
+        events = self.database.child("Events").get()
+        if events.val() is not None:
+            # Remove the None value (in the beginning of the events)
+            events_list = [event for event in events.val() if event is not None]
+            sorted_events = sorted(events_list, key=lambda x: x['date'])
+
+            return sorted_events
+
+        return {}
+
+    """
+    Retrieves events that a user has enrolled to. 
+    The Users collection has an attribute called enrolled_events, which stores the event ids of enrolled events.
+    """
+    def get_enrolled_events(self, user_id):
+        enrolled_events = self.database.child("Users").child(user_id).get()
+        if enrolled_events.val() is not None:
+            data = enrolled_events.val()
+            if isinstance(data, dict):
+                return data.get('enrolled_events', [])
+            elif isinstance(data, list):
+                return data
+            else:
+                return []
+        else:
+            return []
+    
+    """
+    Retrieves the name of a company hosting a specific charity event (specified with event id)
+    """
+    def get_company_name(self, event_id):
+        company_name = self.database.child("Events").child(event_id).get("company_name", "")
+        if company_name.val() is not None:
+            return company_name.val()
+        return ""
+
     """
     Retrieves the password for a specific user.
     Args:

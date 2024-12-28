@@ -10,6 +10,9 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -20,8 +23,17 @@
       <x>540</x>
       <y>390</y>
       <width>75</width>
-      <height>23</height>
+      <height>25</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>70</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="text">
      <string>Login</string>
@@ -29,23 +41,26 @@
    </widget>
    <widget class="QLabel" name="lbl_signup">
     <property name="geometry">
-        <rect>
-            <x>570</x>
-            <y>350</y>
-            <width>41</width>
-            <height>31</height>
-        </rect>
+     <rect>
+      <x>560</x>
+      <y>350</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>50</width>
+      <height>30</height>
+     </size>
     </property>
     <property name="font">
-        <font>
-            <underline>true</underline>
-        </font>
-    </property>
-    <property name="text">
-        <string>Sign up</string>
+     <font>
+      <underline>true</underline>
+     </font>
     </property>
     <property name="styleSheet">
-        <string notr="true">
+     <string notr="true">
         QLabel {
             color: blue;
             text-decoration: underline; /* Makes it look like a hyperlink */
@@ -55,8 +70,11 @@
         }
         </string>
     </property>
-    <property name="cursor">
-        <enum>PointingHandCursor</enum>
+    <property name="text">
+     <string>Sign up</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="txt_user_id">
@@ -108,11 +126,17 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>20</y>
-      <width>591</width>
+      <x>40</x>
+      <y>30</y>
+      <width>711</width>
       <height>111</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>711</width>
+      <height>111</height>
+     </size>
     </property>
     <property name="font">
      <font>
@@ -121,8 +145,14 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="text">
-     <string>Welcome to charity management app</string>
+     <string>Welcome to the Charity Management App</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="lbl_wrong_input">
@@ -134,11 +164,11 @@
       <height>21</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
-    </property>
     <property name="styleSheet">
      <string>color: red;</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
@@ -148,7 +178,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
