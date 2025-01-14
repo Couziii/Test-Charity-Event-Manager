@@ -32,17 +32,21 @@ class Write_db:
     The connection is configured using a predefined dictionary containing API keys and 
     other configuration parameters required by Firebase.
     """
-    def __init__(self):
-        config = {"apiKey": "AIzaSyCzDvjQ_CaezICzS9i0tug_1bXD8qm5HaY",
-                    "authDomain": "charityeventapp.firebaseapp.com",
-                    "projectId": "charityeventapp",
-                    "databaseURL":"https://charityeventapp-default-rtdb.europe-west1.firebasedatabase.app/",
-                    "storageBucket": "charityeventapp.firebasestorage.app",
-                    "messagingSenderId": "868261173430",
-                    "appId": "1:868261173430:web:70433df0ed2d2cf6eeae17",
-                    "measurementId": "G-SZDLQ2851E"}
-        firebase = pyrebase.initialize_app(config)
-        self.database = firebase.database()
+    def __init__(self, database=None):
+
+        if database:
+            self.database = database
+        else:
+            config = {"apiKey": "AIzaSyCzDvjQ_CaezICzS9i0tug_1bXD8qm5HaY",
+                        "authDomain": "charityeventapp.firebaseapp.com",
+                        "projectId": "charityeventapp",
+                        "databaseURL":"https://charityeventapp-default-rtdb.europe-west1.firebasedatabase.app/",
+                        "storageBucket": "charityeventapp.firebasestorage.app",
+                        "messagingSenderId": "868261173430",
+                        "appId": "1:868261173430:web:70433df0ed2d2cf6eeae17",
+                        "measurementId": "G-SZDLQ2851E"}
+            firebase = pyrebase.initialize_app(config)
+            self.database = firebase.database()
 
     """
     Adds a new user to the database.

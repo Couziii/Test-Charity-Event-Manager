@@ -148,6 +148,13 @@ class UI_main_window(QMainWindow):
         # uic.loadUi("program/view/uifiles/main_page.ui", self)
         uic.loadUi(os.path.join(os.path.dirname(__file__), "uiFiles", "main_page.ui"), self)
 
+        # For unit test purposes only
+        # ----------------------------#
+        # user_id = "test_user"
+        # ----------------------------#
+
+        self.wrong_inputs = False
+
         self.user_id = user_id
 
         self.controller= Controller()
@@ -374,7 +381,7 @@ class UI_main_window(QMainWindow):
 
         forbidden_symbols = ["'", '"', ";", "--", "/*", "*/", "#"]
 
-        if any(symbol in self.user_id for symbol in forbidden_symbols):
+        if any(symbol in self.user_id_new for symbol in forbidden_symbols):
           self.lbl_ad_unavailable_user_id.setText("No injection symbols allowed")
           self.wrong_inputs = True
 
