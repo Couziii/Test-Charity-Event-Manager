@@ -1,7 +1,10 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import unittest # Python module for creating and running unit tests
 from unittest.mock import MagicMock # Used for creating mock inputs for testing without real implementations
 from PyQt5.QtWidgets import QApplication # required for running PyQt5 applications
-from signUp import UI_signup_window # the class being tested
+from program.view.signUp import UI_signup_window # the class being tested
 
 class TestUISignupWindow(unittest.TestCase):
     '''Test case class for functionality in the UI_signup_window that inherits from the unittest.TestCase'''
