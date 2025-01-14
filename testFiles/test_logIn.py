@@ -1,8 +1,11 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import unittest # Python framework for testing
 from unittest.mock import patch, MagicMock # Mock creates 'fake' objects (inputs) to use in the testing of a program
 from PyQt5.QtWidgets import QApplication, QLabel, QLineEdit, QPushButton # Widgets that are used in the login window
-from logIn import UI_login_window # The classes being tested
-from signUp import UI_signup_window
+from program.view.logIn import UI_login_window # The classes being tested
+from program.view.signUp import UI_signup_window
 
 class TestUILoginWindow(unittest.TestCase):
     
@@ -67,7 +70,7 @@ class TestUILoginWindow(unittest.TestCase):
         self.window.close = MagicMock()
         
         # The UI_main_window is mocked, instead of initiating the actual main window (then cannot mock inputs)
-        with patch("logIn.UI_main_window") as MockMainWindow:
+        with patch("program.view.logIn.UI_main_window") as MockMainWindow:
             mock_instance = MockMainWindow.return_value
             mock_instance.signal_object.connect = MagicMock()
 
@@ -97,7 +100,7 @@ class TestUILoginWindow(unittest.TestCase):
         self.window.close = MagicMock()
 
         # Mock UI_signup_window to avoid instantiating the actual window
-        with patch("logIn.UI_signup_window") as MockSignupWindow:
+        with patch("program.view.logIn.UI_signup_window") as MockSignupWindow:
             mock_instance = MockSignupWindow.return_value
             mock_instance.signal_object.connect = MagicMock()
 
